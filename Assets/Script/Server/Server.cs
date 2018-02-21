@@ -100,6 +100,8 @@ public class Server : MonoBehaviour
         // Start listen again
         StartListening();
         //Send message to everyone, say someone has connected
+        // In this example, the server brodacast the last client's name
+        Broadcast(clients[clients.Count - 1].clientName + " has connected", clients);
         
 
     }
@@ -129,6 +131,24 @@ public class Server : MonoBehaviour
     private void OnIncomingData(ServerClient c, string data)
     {
         Debug.Log(c.clientName + " has sent the following meassage: " + data);
+    }
+
+    // Send message to all the clients in the list
+    private void Broadcast(String data, List<ServerClient> cl)
+    {
+
+        foreach (ServerClient c in cl)
+        {
+            try
+            {
+                StreamWriter writer = new StreamWriter(c.tcp.GetStream());
+                writer.Flush();
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Write error : " + e.Message + "to clicent" + c.clientName);
+            }
+        }
     }
 }
 
