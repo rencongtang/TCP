@@ -1,12 +1,16 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Client : MonoBehaviour {
+
+
+    // Generate chat panel and message box:
+    public GameObject messagePrefab;
+    public GameObject chatContainer;
 
     // To judge is that going to send/recive message
     private bool socketReady;
@@ -25,7 +29,7 @@ public class Client : MonoBehaviour {
 
         if (socketReady)
             return;
-
+      
         // Default host and post values 
         string host = "127.0.0.1";
         int port = 6321;
@@ -33,9 +37,15 @@ public class Client : MonoBehaviour {
         // Input of host and post in the canvas, overwrite default host port values, if there is something in those booxes
         string h;
         int p;
+       
         h = GameObject.Find("HostInput").GetComponent<InputField>().text;
         if (h != "")
+        {
             host = h;
+            Debug.Log("Game object is: " + GameObject.Find("HostInput").GetComponent<InputField>().text); // Can't find the game object
+        }
+
+        // Convert PortInput into int
         int.TryParse(GameObject.Find("PortInput").GetComponent<InputField>().text, out p);
         if (p != 0)
             port = p;
@@ -73,6 +83,7 @@ public class Client : MonoBehaviour {
 
     private void OnIncomingData(string data)
     {
-        Debug.Log("Server : " + data);
+        Debug.Log(data);
+        Instantiate(messagePrefab, chatContainer.transform);
     }
 }
