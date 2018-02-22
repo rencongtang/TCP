@@ -73,6 +73,7 @@ public class Server : MonoBehaviour
                 if (s.DataAvailable)
                 {
                     StreamReader reader = new StreamReader(s, true);
+                    // Read the content of writeLine()
                     String data = reader.ReadLine();
 
                     if (data != null)

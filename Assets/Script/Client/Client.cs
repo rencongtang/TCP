@@ -83,7 +83,29 @@ public class Client : MonoBehaviour {
 
     private void OnIncomingData(string data)
     {
-        Debug.Log(data);
-        Instantiate(messagePrefab, chatContainer.transform);
+        Debug.Log("client sent the message: " + data);
+        GameObject go = Instantiate(messagePrefab, chatContainer.transform) as GameObject;
+        // send the data information to the chat box
+        go.GetComponentInChildren<Text>().text = data;
     }
+
+    // Send message to the Server 
+    public void Send(String data)
+    {
+        Debug.Log("Recieved a new message that: " + data);
+        if (!socketReady)
+            return;
+        writer.WriteLine(data);
+        writer.Flush();
+    }
+
+    // When click the send button, start send message 
+    public void OnSendButton()
+    {
+        // Get the message in the input box that to be sent
+        String message = GameObject.Find("SendInput").GetComponent<InputField>().text;
+        // Send to the server
+        Send(message);
+    }
+
 }
