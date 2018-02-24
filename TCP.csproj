@@ -222,6 +222,14 @@
     <Compile Include="Assets\DataSphereEmitter.cs" />
     <Compile Include="Assets\MyNetworkManager.cs" />
     <Compile Include="Assets\Script\Client\Client.cs" />
+    <Compile Include="Assets\Script\Hololens-Receiver\BodyDataReceiver.cs" />
+    <Compile Include="Assets\Script\Hololens-Receiver\BodyView.cs" />
+    <Compile Include="Assets\Script\Hololens-Receiver\CustomMessages2.cs" />
+    <Compile Include="Assets\Script\Hololens-Sender\BodyDataConverter.cs" />
+    <Compile Include="Assets\Script\Hololens-Sender\BodyDataSender.cs" />
+    <Compile Include="Assets\Script\Hololens-Sender\BodyView.cs" />
+    <Compile Include="Assets\Script\Hololens-Sender\CustomMessages2.cs" />
+    <Compile Include="Assets\Script\Hololens-Sender\KinectBodyData.cs" />
     <Compile Include="Assets\Script\Server\Server.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
